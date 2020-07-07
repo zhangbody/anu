@@ -112,6 +112,11 @@ export function commitDFS(effects) {
     let error = Renderer.catchError;
     if (error) {
         delete Renderer.catchError;
+
+        if (Renderer.catchStack != undefined) {
+            error.description += ('\n' + Renderer.catchStack);
+        }
+
         throw error;
     }
 }
